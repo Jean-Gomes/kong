@@ -1,0 +1,19 @@
+services:
+  kong:
+    image: kong:latest
+    container_name: kong_api_gateway
+    restart: always
+    networks:
+      - kong-net
+    ports:
+      - "8000:8000" # porta do proxy
+      - "8001:8001" # porta da administração
+    environment:
+      KONG_DATABASE: "off"
+      KONG_PROXY_LISTEN: "0.0.0.0:8000"
+      KONG_ADMIN_LISTEN: "0.0.0.0:8001"
+
+networks:
+  kong-net:
+    driver: bridge
+
